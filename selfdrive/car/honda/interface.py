@@ -7,7 +7,7 @@ from selfdrive.swaglog import cloudlog
 from selfdrive.config import Conversions as CV
 from selfdrive.controls.lib.drive_helpers import create_event, EventTypes as ET, get_events
 from selfdrive.controls.lib.vehicle_model import VehicleModel
-from selfdrive.car.honda.carstate import CarState, get_can_parser, get_cam_can_parser
+from selfdrive.car.honda.carstate import CarState, get_can_parser
 from selfdrive.car.honda.values import CruiseButtons, CAR, HONDA_BOSCH, VISUAL_HUD, ECU, ECU_FINGERPRINT, FINGERPRINTS
 from selfdrive.car import STD_CARGO_KG, CivicParams, scale_rot_inertia, scale_tire_stiffness, is_ecu_disconnected, gen_empty_fingerprint
 from selfdrive.controls.lib.planner import _A_CRUISE_MAX_V
