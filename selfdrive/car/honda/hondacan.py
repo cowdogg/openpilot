@@ -70,6 +70,7 @@ def create_brake_command(packer, apply_brake, pump_on, pcm_override, pcm_cancel_
   #Clarity
   #bus = get_pt_bus(car_fingerprint, is_panda_black)
   #return packer.make_can_msg("BRAKE_COMMAND", bus, values, idx)
+  bus = 2
   commands.append(packer.make_can_msg("BRAKE_COMMAND", bus, values, idx))
   return commands
 
