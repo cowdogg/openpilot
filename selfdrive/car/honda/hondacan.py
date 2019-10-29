@@ -140,7 +140,7 @@ def create_radar_commands(v_ego, car_fingerprint, new_radar_config, idx):
   """Creates an iterable of CAN messages for the radar system."""
   commands = []
   v_ego_kph = np.clip(int(round(v_ego * CV.MS_TO_KPH)), 0, 255)
-  speed = struct.pack('!B', v_ego_kph)
+  speed = str(struct.pack('!B', v_ego_kph))
 
   msg_0x300 = ("\xf9" + speed + "\x8a\xd0" +
                ("\x20" if idx == 0 or idx == 3 else "\x00") +
