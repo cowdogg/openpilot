@@ -30,7 +30,7 @@ def get_lkas_cmd_bus(car_fingerprint, has_relay):
 #Clarity
 def make_can_msg(addr, dat, idx, alt):
   if idx is not None:
-    dat += chr(idx << 4)
+    dat += chr(int(idx << 4))
     dat = fix(dat, addr)
   return [addr, 0, dat, alt]
  #Clarity
