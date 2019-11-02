@@ -144,7 +144,7 @@ def create_radar_commands(v_ego, car_fingerprint, new_radar_config, idx):
 
   msg_0x300 = bytes(("\xf9" + speed + "\x8a\xd0" +
                ("\x20" if idx == 0 or idx == 3 else "\x00") +
-               "\x00\x00"))
+               "\x00\x00"), encoding='utf8')
   msg_0x301 = VEHICLE_STATE_MSG[car_fingerprint]
 
   idx_0x300 = idx
