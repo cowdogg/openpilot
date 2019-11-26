@@ -86,7 +86,7 @@ class RadarD():
     if CP.radarOffCan:
       self.mocked = True
     else:
-      self.mocked = mocked
+      self.mocked = True
 
     self.tracks = defaultdict(dict)
 

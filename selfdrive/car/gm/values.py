@@ -9,8 +9,10 @@ class CAR:
   MALIBU = "CHEVROLET MALIBU PREMIER 2017"
   ACADIA = "GMC ACADIA DENALI 2018"
   BUICK_REGAL = "BUICK REGAL ESSENCE 2018"
+  CRUZE = "CHEVROLET CRUZE LT 2013"
 
 SUPERCRUISE_CARS = [CAR.CADILLAC_CT6]
+NO_ASCM_CARS = [CAR.BOLT, CAR.CRUZE]
 
 class CruiseButtons:
   UNPRESS     = 1
@@ -46,6 +48,11 @@ def parse_gear_shifter(can_gear):
     return car.CarState.GearShifter.unknown
 
 FINGERPRINTS = {
+  CAR.CRUZE: [
+    # Cruze LT no ACC 2013
+  {
+    170: 8, 190: 2, 193: 8, 197: 8, 199: 4, 201: 8, 209: 7, 241: 6, 249: 8, 288: 5, 298: 8, 304: 1, 309: 8, 311: 8, 313: 8, 320: 3, 328: 1, 352: 5, 381: 6, 384: 4, 386: 3, 389: 2, 393: 8, 398: 8, 401: 8, 409: 8, 413: 8, 417: 7, 419: 1, 431: 6, 442: 8, 451: 8, 452: 8, 453: 6, 455: 7, 456: 8, 462: 8, 481: 7, 485: 8, 489: 8, 491: 2, 493: 8, 495: 4, 497: 8, 499: 3, 500: 6, 501: 8, 528: 4, 532: 6, 562: 7, 564: 4, 707: 8, 715: 8, 723: 2, 753: 5, 761: 7, 810: 8, 840: 5, 842: 5, 866: 4, 880: 6, 961: 8, 969: 8, 977: 8, 979: 6, 1001: 8, 1005: 6, 1009: 8, 1017: 8, 1020: 5, 1033: 7, 1034: 7, 1105: 6, 1217: 8, 1221: 3, 1225: 4, 1233: 8, 1241: 3, 1249: 8, 1257: 6, 1265: 8, 1267: 1, 1280: 4, 1300: 8, 1322: 6, 1328: 4, 1417: 7, 1904: 7, 1906: 7, 1907: 7, 1912: 7, 1919: 7, 1920: 7
+  }],
   # Astra BK MY17, ASCM unplugged
   CAR.HOLDEN_ASTRA: [{
     190: 8, 193: 8, 197: 8, 199: 4, 201: 8, 209: 7, 211: 8, 241: 6, 249: 8, 288: 5, 298: 8, 304: 1, 309: 8, 311: 8, 313: 8, 320: 3, 328: 1, 352: 5, 381: 6, 384: 4, 386: 8, 388: 8, 393: 8, 398: 8, 401: 8, 413: 8, 417: 8, 419: 8, 422: 1, 426: 7, 431: 8, 442: 8, 451: 8, 452: 8, 453: 8, 455: 7, 456: 8, 458: 5, 479: 8, 481: 7, 485: 8, 489: 8, 497: 8, 499: 3, 500: 8, 501: 8, 508: 8, 528: 5, 532: 6, 554: 3, 560: 8, 562: 8, 563: 5, 564: 5, 565: 5, 567: 5, 647: 5, 707: 8, 715: 8, 723: 8, 753: 5, 761: 7, 806: 1, 810: 8, 840: 5, 842: 5, 844: 8, 866: 4, 961: 8, 969: 8, 977: 8, 979: 8, 985: 5, 1001: 8, 1009: 8, 1011: 6, 1017: 8, 1019: 3, 1020: 8, 1105: 6, 1217: 8, 1221: 5, 1225: 8, 1233: 8, 1249: 8, 1257: 6, 1259: 8, 1261: 7, 1263: 4, 1265: 8, 1267: 8, 1280: 4, 1300: 8, 1328: 4, 1417: 8, 1906: 7, 1907: 7, 1908: 7, 1912: 7, 1919: 7,
@@ -94,6 +101,8 @@ ECU_FINGERPRINT = {
 }
 
 DBC = {
+  CAR.CRUZE: dbc_dict('gm_global_a_powertrain', 'gm_global_a_object', chassis_dbc='gm_global_a_chassis'),
+
   CAR.HOLDEN_ASTRA: dbc_dict('gm_global_a_powertrain', 'gm_global_a_object', chassis_dbc='gm_global_a_chassis'),
   CAR.VOLT: dbc_dict('gm_global_a_powertrain', 'gm_global_a_object', chassis_dbc='gm_global_a_chassis'),
   CAR.MALIBU: dbc_dict('gm_global_a_powertrain', 'gm_global_a_object', chassis_dbc='gm_global_a_chassis'),

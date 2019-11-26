@@ -54,8 +54,8 @@ class CarInterface(CarInterfaceBase):
     return float(accel) / 4.8 - creep_brake
 
   @staticmethod
-  
-  
+
+
   def calc_accel_override(a_ego, a_target, v_ego, v_target):
 
     # normalized max accel. Allowing max accel at low speed causes speed overshoots
@@ -156,6 +156,15 @@ class CarInterface(CarInterfaceBase):
       ret.steerRatioRear = 0.
       ret.centerToFront = ret.wheelbase * 0.4
 
+    elif candidate == CAR.CRUZE:
+      ret.minEnableSpeed = 25 * CV.MPH_TO_MS
+      ret.mass = 3779. * CV.LB_TO_KG + STD_CARGO_KG # (3849+3708)/2
+      ret.safetyModel = car.CarParams.SafetyModel.gm
+      ret.wheelbase = 2.83 #111.4 inches in meters
+      ret.steerRatio = 14.4 # guess for tourx
+      ret.steerRatioRear = 0.
+      ret.centerToFront = ret.wheelbase * 0.4 # guess for tourx
+
     elif candidate == CAR.BUICK_REGAL:
       ret.minEnableSpeed = 18 * CV.MPH_TO_MS
       ret.mass = 3779. * CV.LB_TO_KG + STD_CARGO_KG # (3849+3708)/2
@@ -253,7 +262,7 @@ class CarInterface(CarInterfaceBase):
     ret.brake = self.CS.user_brake / 0xd0
     ret.brakePressed = self.CS.brake_pressed
     ret.brakeLights = self.CS.frictionBrakesActive
-    
+
     # steering wheel
     ret.steeringAngle = self.CS.angle_steers
 
@@ -313,7 +322,7 @@ class CarInterface(CarInterfaceBase):
       buttonEvents.append(be)
 
     ret.buttonEvents = buttonEvents
-    
+
     if cruiseEnabled and self.CS.lka_button and self.CS.lka_button != self.CS.prev_lka_button:
       self.CS.lkMode = not self.CS.lkMode
 
@@ -323,7 +332,7 @@ class CarInterface(CarInterfaceBase):
          self.CS.follow_level = 3
 
     events = []
-    
+
     if cruiseEnabled and (self.CS.left_blinker_on or self.CS.right_blinker_on):
        events.append(create_event('manualSteeringRequiredBlinkersOn', [ET.WARNING]))
 
@@ -365,8 +374,9 @@ class CarInterface(CarInterfaceBase):
         events.append(create_event('pedalPressed', [ET.PRE_ENABLE]))
       if ret.cruiseState.standstill:
         events.append(create_event('resumeRequired', [ET.WARNING]))
-      if self.CS.pcm_acc_status == AccState.FAULTED:
-        events.append(create_event('controlsFailed', [ET.NO_ENTRY, ET.IMMEDIATE_DISABLE]))
+      if not self.CS.car_fingerprint == CAR.CRUZE:
+        if self.CS.pcm_acc_status == AccState.FAULTED:
+          events.append(create_event('controlsFailed', [ET.NO_ENTRY, ET.IMMEDIATE_DISABLE]))
 
       # handle button presses
       for b in ret.buttonEvents:
