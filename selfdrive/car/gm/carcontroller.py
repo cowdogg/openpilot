@@ -4,7 +4,7 @@ from common.numpy_fast import interp
 from selfdrive.config import Conversions as CV
 from selfdrive.car import apply_std_steer_torque_limits
 from selfdrive.car.gm import gmcan
-from selfdrive.car.gm.values import DBC, AccState, SUPERCRUISE_CARS
+from selfdrive.car.gm.values import DBC, AccState, SUPERCRUISE_CARS, NO_ASCM_CARS
 from selfdrive.can.packer import CANPacker
 
 VisualAlert = car.CarControl.HUDControl.VisualAlert
@@ -93,7 +93,7 @@ class CarController():
     # Send CAN commands.
     can_sends = []
     canbus = self.canbus
-    
+
     alert_out = process_hud_alert(hud_alert)
     steer = alert_out
 
@@ -163,7 +163,7 @@ class CarController():
         if self.fcw_count > 0:
           self.fcw_count -= 1
           send_fcw = 0x3
-        can_sends.append(gmcan.create_acc_dashboard_command(self.packer_pt, canbus.powertrain, enabled, 
+        can_sends.append(gmcan.create_acc_dashboard_command(self.packer_pt, canbus.powertrain, enabled,
                                                            hud_v_cruise * CV.MS_TO_KPH, hud_show_car, follow_level, send_fcw))
 
       # Radar needs to know current speed and yaw rate (50hz),
