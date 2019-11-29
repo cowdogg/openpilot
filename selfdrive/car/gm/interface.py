@@ -157,7 +157,8 @@ class CarInterface(CarInterfaceBase):
       ret.centerToFront = ret.wheelbase * 0.4
 
     elif candidate == CAR.CRUZE:
-      ret.minEnableSpeed = 25 * CV.MPH_TO_MS
+      ret.minEnableSpeed = -1
+      #ret.minEnableSpeed = 25 * CV.MPH_TO_MS
       ret.mass = 3779. * CV.LB_TO_KG + STD_CARGO_KG # (3849+3708)/2
       ret.safetyModel = car.CarParams.SafetyModel.gm
       ret.wheelbase = 2.83 #111.4 inches in meters
@@ -241,8 +242,8 @@ class CarInterface(CarInterfaceBase):
     # create message
     ret = car.CarState.new_message()
 
-    ret.canValid = self.pt_cp.can_valid
-
+    #ret.canValid = self.pt_cp.can_valid
+    ret.canValid = True
     # speeds
     ret.vEgo = self.CS.v_ego
     ret.aEgo = self.CS.a_ego
@@ -374,9 +375,9 @@ class CarInterface(CarInterfaceBase):
         events.append(create_event('pedalPressed', [ET.PRE_ENABLE]))
       if ret.cruiseState.standstill:
         events.append(create_event('resumeRequired', [ET.WARNING]))
-      if not self.CS.car_fingerprint == CAR.CRUZE:
-        if self.CS.pcm_acc_status == AccState.FAULTED:
-          events.append(create_event('controlsFailed', [ET.NO_ENTRY, ET.IMMEDIATE_DISABLE]))
+#      if not self.CS.car_fingerprint == CAR.CRUZE:
+#        if self.CS.pcm_acc_status == AccState.FAULTED:
+#          events.append(create_event('controlsFailed', [ET.NO_ENTRY, ET.IMMEDIATE_DISABLE]))
 
       # handle button presses
       for b in ret.buttonEvents:
