@@ -175,14 +175,14 @@ class CarInterface(CarInterfaceBase):
       ret.steerRatioRear = 0.
       ret.centerToFront = ret.wheelbase * 0.4 # guess for tourx
 
-    elif candidate == CAR.CADILLAC_ATS:
-      ret.minEnableSpeed = 18 * CV.MPH_TO_MS
-      ret.mass = 1601. + STD_CARGO_KG
-      ret.safetyModel = car.CarParams.SafetyModel.gm
-      ret.wheelbase = 2.78
-      ret.steerRatio = 15.3
-      ret.steerRatioRear = 0.
-      ret.centerToFront = ret.wheelbase * 0.49
+#    elif candidate == CAR.CADILLAC_ATS:
+#      ret.minEnableSpeed = 18 * CV.MPH_TO_MS
+#      ret.mass = 1601. + STD_CARGO_KG
+#      ret.safetyModel = car.CarParams.SafetyModel.gm
+#      ret.wheelbase = 2.78
+#      ret.steerRatio = 15.3
+#      ret.steerRatioRear = 0.
+#      ret.centerToFront = ret.wheelbase * 0.49
 
     elif candidate == CAR.CADILLAC_CT6:
       # engage speed is decided by pcm
