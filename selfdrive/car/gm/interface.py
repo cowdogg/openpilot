@@ -157,7 +157,7 @@ class CarInterface(CarInterfaceBase):
       ret.centerToFront = ret.wheelbase * 0.4
 
     elif candidate == CAR.CRUZE:
-      ret.minEnableSpeed = -1
+      ret.minEnableSpeed = 20 * CV.MPH_TO_MS
       #ret.minEnableSpeed = 25 * CV.MPH_TO_MS
       ret.mass = 3779. * CV.LB_TO_KG + STD_CARGO_KG # (3849+3708)/2
       ret.safetyModel = car.CarParams.SafetyModel.gm
